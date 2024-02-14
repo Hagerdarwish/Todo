@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Todo(
-    @PrimaryKey
-    var id:Int ,
+    @PrimaryKey(autoGenerate = true)
+    var id:Int=0 ,
     @ColumnInfo
     var title:String?,
     @ColumnInfo

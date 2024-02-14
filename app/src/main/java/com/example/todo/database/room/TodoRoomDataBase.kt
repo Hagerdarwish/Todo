@@ -13,19 +13,21 @@ import com.example.todo.database.dao.TodoDao
 import com.example.todo.database.model.Todo
 
 
-@Database([Todo::class], version = 1)
+@Database(entities = [Todo::class], version = 1 ,
+
+    exportSchema = true)
  abstract class TodoRoomDataBase: RoomDatabase() {
      abstract fun todoDao():TodoDao
      companion object{
-         private var databaseRoom:TodoRoomDataBase?=null
+         private var database:TodoRoomDataBase?=null
          fun getInstance(context: Context):TodoRoomDataBase{
-             if(databaseRoom==null){
-                 Room.databaseBuilder(
+             if(database==null){
+               database=  Room.databaseBuilder(
                      context.applicationContext,
-                     RoomDatabase::class.java, "database-name"
-                 ).build()
+                     TodoRoomDataBase::class.java, "database-name"
+                 ).allowMainThreadQueries(). fallbackToDestructiveMigration().build()
              }
-             return databaseRoom!!
+             return database!!
          }
      }
 }
