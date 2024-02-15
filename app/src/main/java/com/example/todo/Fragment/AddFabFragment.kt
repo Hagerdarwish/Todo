@@ -3,6 +3,7 @@ package com.example.todo.Fragment
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.DatePicker
 import androidx.annotation.NonNull
 import androidx.core.widget.addTextChangedListener
 import com.example.todo.R
+import com.example.todo.clearTime
 import com.example.todo.database.model.Todo
 import com.example.todo.database.room.TodoRoomDataBase
 import com.example.todo.databinding.FragmentAddFabBinding
@@ -37,6 +39,8 @@ class AddFabFragment( var updateBtn :() -> Unit) : BottomSheetDialogFragment() {
             if (validate()){
                 var title=binding.etTitle.text.toString()
                 var discription=binding.etDescription.text.toString()
+                selectedDate.clearTime()
+                Log.e("fab","selectedDate${selectedDate.timeInMillis}")
                 var todoModel= Todo(title=title, description = discription, isDone = false, date = selectedDate.timeInMillis)
                 TodoRoomDataBase.getInstance(requireActivity().applicationContext).todoDao().insertTodo(todoModel)
 
@@ -56,10 +60,17 @@ class AddFabFragment( var updateBtn :() -> Unit) : BottomSheetDialogFragment() {
         binding.tvDate.setOnClickListener{
             val datePicker=DatePickerDialog(requireActivity(),object :OnDateSetListener{
                 override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+                    selectedDate.set(Calendar.YEAR,year)
+                    selectedDate.set(Calendar.MONTH,month)
+                    selectedDate.set(Calendar.DAY_OF_MONTH,dayOfMonth)
                     binding.tvDate.text="${dayOfMonth}/${month+1}/${year}"
 
                 }
-            },selectedDate.get(Calendar.YEAR),selectedDate.get(Calendar.MONTH),selectedDate.get(Calendar.DAY_OF_MONTH))
+            },selectedDate.get(Calendar.YEAR),
+                selectedDate.get(Calendar.MONTH),
+                selectedDate.get(Calendar.DAY_OF_MONTH))
+            //to day time in general not selected date due to i determine it
+            datePicker.datePicker.minDate=Calendar.getInstance().timeInMillis
 
         datePicker.show()
 
