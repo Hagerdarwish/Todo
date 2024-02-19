@@ -1,27 +1,28 @@
 package com.example.todo.Fragment
 
+
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.daimajia.swipe.SwipeLayout
 import com.example.todo.R
 import com.example.todo.TodoAdabter
 import com.example.todo.database.model.Todo
 import com.example.todo.database.room.TodoRoomDataBase
 import com.example.todo.databinding.FragmentListBinding
-import com.example.todo.databinding.TodoItemBinding
 import com.example.todo.timeInMillis
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import java.util.Calendar
 
 
 class ListFragment : Fragment() {
 
 lateinit var binding: FragmentListBinding
 var adapter=TodoAdabter(listOf())
+
     var selectedDate= CalendarDay.today()
 
 
@@ -46,6 +47,8 @@ var adapter=TodoAdabter(listOf())
             selectedDate=date
             refreshData()
         }
+
+
         refreshData()
     }
 

@@ -20,7 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.Calendar
 
 
-class AddFabFragment( var updateBtn :() -> Unit) : BottomSheetDialogFragment() {
+class AddFabFragment(private var updateBtn :() -> Unit) : BottomSheetDialogFragment() {
     lateinit var binding: FragmentAddFabBinding
     var selectedDate=Calendar.getInstance()
 
