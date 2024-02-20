@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:tool="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.ListFragment">
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mcv_dateTextAppearance="@color/gray"
+
+        app:mcv_weekDayTextAppearance="@color/blue"
+        app:mcv_headerTextAppearance="@color/mint"
+        android:scrollbarStyle="insideOverlay"
+        app:mcv_tileHeight="40dp"
+       app:mcv_titleAnimationOrientation="vertical"
+
+        app:mcv_calendarMode="week"
+        app:mcv_showOtherDates="all"
+        app:mcv_selectionColor="@color/blue"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/todo_item"
+            tool:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+
+
+    </FrameLayout>
+    <com.daimajia.swipe.SwipeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <!-- Bottom View Start-->
+        <LinearLayout
+
+            android:background="#66ddff00"
+            android:id="@+id/bottom_wrapper"
+            android:layout_width="160dp"
+            android:weightSum="1"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <!--What you want to show-->
+        </LinearLayout>
+        <!-- Bottom View End-->
+
+        <!-- Surface View Start -->
+        <LinearLayout
+            android:padding="10dp"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!--What you want to show in SurfaceView-->
+        </LinearLayout>
+        <!-- Surface View End -->
+    </com.daimajia.swipe.SwipeLayout>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
