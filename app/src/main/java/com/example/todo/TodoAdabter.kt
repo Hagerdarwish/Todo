@@ -1,9 +1,11 @@
 package com.example.todo
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -12,6 +14,7 @@ import com.example.todo.Fragment.ListFragment
 import com.example.todo.database.model.Todo
 import com.example.todo.database.room.TodoRoomDataBase
 import com.example.todo.databinding.TodoItemBinding
+
 
 class TodoAdabter(var todoList: List<Todo>):Adapter<TodoAdabter.MyViewHolder>(){
 
@@ -36,15 +39,24 @@ fun update(updatedList:List<Todo>){
 
 }
 
-
+var btnClicked:EditBtnClicked?=null
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var todoData=todoList[position]
         holder.binding.tvItemTitle.text=todoData.title
         holder.binding.tvDescription.text=todoData.description
 
-
-
         val swipeLayout =holder.binding.swipeLayout
+        holder.binding.img.setOnClickListener {
+           var intent= Intent(holder.itemView.context,EditsActivity::class.java)
+            intent.putExtra("id","${todoData.id}")
+
+           holder.itemView.context.startActivity(intent)
+           // btnClicked!!.clicked(todoData.id)
+
+            
+        }
+
+
         swipeLayout.addSwipeListener(object  : SwipeLayout.SwipeListener{
             override fun onStartOpen(layout: SwipeLayout?) {
 
@@ -81,8 +93,12 @@ fun update(updatedList:List<Todo>){
 
 
 
+
     }
 
+interface EditBtnClicked{
+    fun clicked(id:Int)
+}
 
 
 }

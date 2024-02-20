@@ -8,4 +8,6 @@
     <string name="selected_date">Selected date</string>
     <string name="description">description</string>
     <string name="delete">Delete</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="save">Save</string>
 </resources>
